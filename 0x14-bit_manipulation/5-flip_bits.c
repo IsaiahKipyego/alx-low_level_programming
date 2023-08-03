@@ -6,6 +6,7 @@
 *Return: number of flipped bits
 */
 unsigned int flip_bits(unsigned long int p, unsigned long int q)
+
 {
 	unsigned long int flipped = p ^ q;
 	int count = 0;
