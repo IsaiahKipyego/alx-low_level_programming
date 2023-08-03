@@ -2,8 +2,8 @@
 #define MAIN_H
 #include <stdlib.h>
 #include <stddef.h>
-unsigned int binary_to_uint(const char *b);
-int check_valid_string(const char *b);
+unsigned int binary_to_uint(const char *a);
+int check_valid_string(const char *a);
 int _putchar(char c);
 void print_binary(unsigned long int p);
 int get_bit(unsigned long int p, unsigned int index);
