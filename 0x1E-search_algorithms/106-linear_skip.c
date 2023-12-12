@@ -1,49 +1,45 @@
 #include "search_algos.h"
 
 /**
- * linear_skip - function that searches a linked list with an express list
- * @list: to search through
- * @value: to find in the list
+ * linear_skip - function searches for a value in a skip list
  *
- * Return: address of the value in the list, otherwise NULL
+ * @list: input list
+ * @value: to search in
+ * Return: index of number
  */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-	size_t i;
-	skiplist_t *temp = list, *prev;
+	skiplist_t *go;
 
-	while (temp)
+	if (list == NULL)
+		return (NULL);
+
+	go = list;
+
+	do {
+		list = go;
+		go = go->express;
+		printf("Value checked at index ");
+		printf("[%d] = [%d]\n", (int)go->index, go->n);
+	} while (go->express && go->n < value);
+
+	if (go->express == NULL)
 	{
-		if (temp->express)
-		{
-			prev = temp;
-			temp = temp->express;
-		}
-		else
-		{
-			prev = temp;
-			while (temp->next)
-				temp = temp->next;
-		}
-		if (prev == temp)
-			return (NULL);
-
-		printf("Value checked at index [%lu] = [%d]\n",
-		       temp->index, temp->n);
-		if (temp->n >= value || temp->next == NULL)
-		{
-			printf("Value found between indexes [%lu] and [%lu]\n",
-			       prev->index, temp->index);
-			for (i = prev->index; i <= temp->index; i++)
-			{
-				printf("Value checked at index [%lu] = [%d]\n",
-				       prev->index, prev->n);
-				if (prev->n == value)
-					return (prev);
-				prev = prev->next;
-			}
-			return (NULL);
-		}
+		list = go;
+		while (go->next)
+			go = go->next;
 	}
+
+	printf("Value found between indexes ");
+	printf("[%d] and [%d]\n", (int)list->index, (int)go->index);
+
+	while (list != go->next)
+	{
+		printf("Value checked at index [%d] = [%d]\n", (int)list->index, list->n);
+		if (list->n == value)
+			return (list);
+		list = list->next;
+	}
+
 	return (NULL);
 }
