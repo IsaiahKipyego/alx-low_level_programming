@@ -11,7 +11,6 @@
  * Return: a Pointer to  first node where value is located or
  * if value is not present in head or if head is NULL, return NULL
  */
-listint_t *jump_list(listint_t *list, size_t size, int value)
 {
 	listint_t *low =  NULL, *high = NULL;
 	size_t limit = 0;
